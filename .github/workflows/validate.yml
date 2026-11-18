@@ -1,0 +1,66 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  version:
+    name: Version consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Changelog has a top version entry
+        run: |
+          VERSION="$(grep -m1 '^## ' CHANGELOG.md | awk '{print $2}')"
+          echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$' \
+            || { echo "::error file=CHANGELOG.md::top entry is not '## x.y.z - date'"; exit 1; }
+          echo "Version $VERSION"
+
+  theme:
+    name: Theme YAML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tools
+        run: pip install pyyaml yamllint
+
+      - name: Lint themes
+        run: |
+          yamllint -d "{extends: relaxed, rules: {line-length: disable}}" themes/
+
+      - name: Check theme structure
+        run: |
+          python - <<'PY'
+          import glob, sys, yaml
+          ok = True
+          for path in glob.glob("themes/*.yaml"):
+              data = yaml.safe_load(open(path))
+              if not isinstance(data, dict) or not data:
+                  print(f"::error file={path}::no theme defined"); ok = False; continue
+              for name, vars in data.items():
+                  modes = (vars or {}).get("modes", {})
+                  if not ({"light", "dark"} <= set(modes)):
+                      print(f"::error file={path}::'{name}' must define modes.light and modes.dark"); ok = False
+          sys.exit(0 if ok else 1)
+          PY

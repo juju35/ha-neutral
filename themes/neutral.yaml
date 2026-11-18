@@ -1,0 +1,126 @@
+Neutral:
+  # ==== Shape (light and dark) ====
+  ha-card-border-radius: "14px"
+  ha-card-border-width: "1px"
+  ha-card-box-shadow: "none"
+  mdc-shape-medium: "14px"
+  ha-dialog-border-radius: "16px"
+
+  # ==== Modes ====
+  modes:
+    light:
+      # Accent
+      primary-color: "#2563eb"
+      accent-color: "#2563eb"
+      rgb-primary-color: "37, 99, 235"
+      rgb-accent-color: "37, 99, 235"
+
+      # Page and surfaces: flat neutral grays
+      primary-background-color: "#e9ecef"
+      lovelace-background: "#e9ecef"
+      secondary-background-color: "#f4f5f7"
+      card-background-color: "#ffffff"
+      ha-card-background: "#ffffff"
+      ha-card-border-color: "#e1e4e8"
+      divider-color: "#e1e4e8"
+      ha-dialog-surface-background: "#ffffff"
+      mdc-dialog-scrim-color: "rgba(0, 0, 0, 0.32)"
+
+      # Text and icons
+      primary-text-color: "#1c1e21"
+      secondary-text-color: "#6b7078"
+      text-primary-color: "#ffffff"
+      disabled-text-color: "#a3a8af"
+      state-icon-color: "#6b7078"
+      state-icon-active-color: "#b7791f"
+
+      # App header and side panel
+      app-header-background-color: "#f7f8f9"
+      app-header-text-color: "#1c1e21"
+      app-header-border-bottom: "1px solid #e1e4e8"
+      sidebar-background-color: "#f7f8f9"
+      sidebar-text-color: "#1c1e21"
+      sidebar-icon-color: "#6b7078"
+      sidebar-selected-text-color: "#2563eb"
+      sidebar-selected-icon-color: "#2563eb"
+
+      # Status palette of the ha-* cards (green OK, amber active, blue open,
+      # cyan cold, purple media, red alert, gray idle). State colors derive from these.
+      green-color: "#2f8a4c"
+      amber-color: "#b7791f"
+      orange-color: "#c2610f"
+      yellow-color: "#a8860b"
+      blue-color: "#2563eb"
+      light-blue-color: "#2f80c9"
+      cyan-color: "#0e8fa8"
+      teal-color: "#0f8a7a"
+      purple-color: "#7c4dcc"
+      deep-purple-color: "#6741b8"
+      red-color: "#c53030"
+      grey-color: "#80868e"
+      success-color: "#2f8a4c"
+      warning-color: "#b7791f"
+      error-color: "#c53030"
+      info-color: "#2563eb"
+      rgb-success-color: "47, 138, 76"
+      rgb-warning-color: "183, 121, 31"
+      rgb-error-color: "197, 48, 48"
+      rgb-info-color: "37, 99, 235"
+
+    dark:
+      # Accent
+      primary-color: "#6fa8f5"
+      accent-color: "#6fa8f5"
+      rgb-primary-color: "111, 168, 245"
+      rgb-accent-color: "111, 168, 245"
+
+      # Page and surfaces: flat neutral grays
+      primary-background-color: "#111315"
+      lovelace-background: "#111315"
+      secondary-background-color: "#25292e"
+      card-background-color: "#1c1f23"
+      ha-card-background: "#1c1f23"
+      ha-card-border-color: "#2c3035"
+      divider-color: "#2c3035"
+      ha-dialog-surface-background: "#1c1f23"
+      mdc-dialog-scrim-color: "rgba(0, 0, 0, 0.6)"
+
+      # Text and icons
+      primary-text-color: "#e8eaed"
+      secondary-text-color: "#9aa0a6"
+      text-primary-color: "#111315"
+      disabled-text-color: "#5f656c"
+      state-icon-color: "#9aa0a6"
+      state-icon-active-color: "#f2b84b"
+
+      # App header and side panel
+      app-header-background-color: "#1a1d20"
+      app-header-text-color: "#e8eaed"
+      app-header-border-bottom: "1px solid #2c3035"
+      sidebar-background-color: "#1a1d20"
+      sidebar-text-color: "#e8eaed"
+      sidebar-icon-color: "#9aa0a6"
+      sidebar-selected-text-color: "#6fa8f5"
+      sidebar-selected-icon-color: "#6fa8f5"
+
+      # Status palette of the ha-* cards, brightened for dark surfaces.
+      green-color: "#5fd08a"
+      amber-color: "#f2b84b"
+      orange-color: "#f2924b"
+      yellow-color: "#e8cf5a"
+      blue-color: "#6fa8f5"
+      light-blue-color: "#6cbcf0"
+      cyan-color: "#5cc8e0"
+      teal-color: "#4fd1bd"
+      purple-color: "#b39af2"
+      deep-purple-color: "#9d85e8"
+      red-color: "#f07a78"
+      grey-color: "#9aa0a6"
+      success-color: "#5fd08a"
+      warning-color: "#f2b84b"
+      error-color: "#f07a78"
+      info-color: "#6fa8f5"
+      rgb-success-color: "95, 208, 138"
+      rgb-warning-color: "242, 184, 75"
+      rgb-error-color: "240, 122, 120"
+      rgb-info-color: "111, 168, 245"
