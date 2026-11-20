@@ -76,3 +76,58 @@ jobs:
                               print(f"::error file={path}::'{name}' {mode}: {key} is '{value}', {key[4:]} {color} is '{want}'"); ok = False
           sys.exit(0 if ok else 1)
           PY
+
+      - name: Check status color contrast
+        # Every status color must read as text (WCAG >= 4.5:1) on the backgrounds the theme
+        # declares: the card over each page color (gradient stops included, for translucent
+        # cards), the inner tile (secondary-background-color) over that card, and the dialog
+        # surface; as an icon (>= 3:1) on its own 20% tinted pastille over those backgrounds.
+        run: |
+          python - <<'PY'
+          import glob, re, sys, yaml
+          NAMES = ("green amber orange yellow blue light-blue cyan teal purple deep-purple red grey"
+                   " success warning error info").split()
+          def parse(c):
+              c = str(c).strip()
+              if re.fullmatch(r"#[0-9a-fA-F]{6}", c):
+                  return [int(c[i:i + 2], 16) for i in (1, 3, 5)] + [1.0]
+              m = re.fullmatch(r"rgba?\(([^)]*)\)", c)
+              if m:
+                  p = [float(x) for x in m.group(1).split(",")]
+                  return p[:3] + [p[3] if len(p) > 3 else 1.0]
+              return None
+          def over(fg, bg):
+              return [fg[i] * fg[3] + bg[i] * (1 - fg[3]) for i in range(3)] + [1.0]
+          def lum(c):
+              ch = [v / 255 for v in c[:3]]
+              ch = [v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4 for v in ch]
+              return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2]
+          def ratio(a, b):
+              hi, lo = sorted((lum(a), lum(b)), reverse=True)
+              return (hi + 0.05) / (lo + 0.05)
+          ok = True
+          for path in glob.glob("themes/*.yaml"):
+              for name, vars in yaml.safe_load(open(path)).items():
+                  for mode in ("light", "dark"):
+                      m = {**{k: v for k, v in vars.items() if k != "modes"}, **(vars["modes"].get(mode) or {})}
+                      pages = [parse(m["primary-background-color"])]
+                      pages += [parse(x) for x in re.findall(r"#[0-9a-fA-F]{6}", str(m.get("lovelace-background", "")))]
+                      card = parse(m.get("ha-card-background", m.get("card-background-color")))
+                      cards = [over(card, p) for p in pages]
+                      bgs = {f"card over page stop {i}": c for i, c in enumerate(cards)}
+                      bgs.update({f"tile over card {i}": over(parse(m["secondary-background-color"]), c) for i, c in enumerate(cards)})
+                      if "ha-dialog-surface-background" in m:
+                          bgs.update({f"dialog over page stop {i}": over(parse(m["ha-dialog-surface-background"]), p) for i, p in enumerate(pages)})
+                      for n in NAMES:
+                          col = parse(m.get(f"{n}-color"))
+                          if col is None or col[3] != 1.0:
+                              print(f"::error file={path}::'{name}' {mode}: {n}-color must be a #rrggbb color"); ok = False; continue
+                          text = min((ratio(col, b), k) for k, b in bgs.items())
+                          icon = min((ratio(col, over(col[:3] + [0.2], b)), k) for k, b in bgs.items())
+                          print(f"{name} {mode:5} {n:12} {m[n + '-color']}  text {text[0]:.2f}  icon {icon[0]:.2f}")
+                          if text[0] < 4.5:
+                              print(f"::error file={path}::'{name}' {mode}: {n}-color {m[n + '-color']} is {text[0]:.2f}:1 on the {text[1]} (< 4.5:1)"); ok = False
+                          if icon[0] < 3:
+                              print(f"::error file={path}::'{name}' {mode}: {n}-color {m[n + '-color']} icon is {icon[0]:.2f}:1 on its pastille over the {icon[1]} (< 3:1)"); ok = False
+          sys.exit(0 if ok else 1)
+          PY
