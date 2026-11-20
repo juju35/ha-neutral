@@ -24,11 +24,12 @@ npx --yes jscpd@5.4.2 .
 ```
 
 ## Releasing — how it works here
-A release is **automatic**: on push to `main`, if `package.json` carries a version with
-no matching tag, the Release workflow publishes `vX.Y.Z`. **Never create a tag by hand.**
+A release is **automatic**: on push to `main`, if the top `## X.Y.Z - date` section of
+`CHANGELOG.md` carries a version with no matching tag, the Release workflow publishes `vX.Y.Z`
+(a theme repo has no `package.json`). **Never create a tag by hand.**
 
-The `Version consistency` check (validate.yml) requires the **same version in every place**,
-or the release fails.
+The `Version consistency` check (validate.yml) requires the top CHANGELOG entry to read
+`## X.Y.Z - date`, or the release fails.
 
 ## Bumping the version
 This is a **THEME** repo. A bump is complete only when **every** file below

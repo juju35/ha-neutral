@@ -1,7 +1,7 @@
 # ha-neutral
 
 [![Marketplace](https://img.shields.io/badge/Marketplace-Custom-41BDF5.svg)](https://www.home-assistant.io/integrations/marketplace/)
-[![HACS Validation](https://github.com/juju35/ha-neutral/actions/workflows/hacs.yml/badge.svg)](https://github.com/juju35/ha-neutral/actions/workflows/hacs.yml)
+[![Marketplace validation](https://github.com/juju35/ha-neutral/actions/workflows/hacs.yml/badge.svg)](https://github.com/juju35/ha-neutral/actions/workflows/hacs.yml)
 [![Validate](https://github.com/juju35/ha-neutral/actions/workflows/validate.yml/badge.svg)](https://github.com/juju35/ha-neutral/actions/workflows/validate.yml)
 [![Release](https://img.shields.io/github/v/release/juju35/ha-neutral)](https://github.com/juju35/ha-neutral/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/juju35/ha-neutral/blob/main/LICENSE)
