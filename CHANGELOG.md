@@ -4,8 +4,11 @@
 
 ### Fixes
 - `rgb-primary-text-color` and `rgb-text-primary-color` are set in both modes, so the parts of Home Assistant that tint with them (hovers, ripples, text on the accent) match the theme's text colors instead of the default ones.
+- Light mode: amber (`amber-color`, `warning-color`, `state-icon-active-color`) and yellow are darker — `#9f691b` and `#8e7109`, 4.6:1 on the white card instead of 3.6:1 and 3.45:1 — so a coloured state line ("Heating", "Charging"…) reads as text, not only as an icon.
+- README: the validation badge is named after the Marketplace, as in the rest of the README.
 
 ### Maintenance
+- Repository guide: the release reads the version from the top CHANGELOG entry (a theme has no `package.json`).
 - Validate: `setup-python` pinned to a commit, and a new check that every `rgb-*` variable matches the color it shadows.
 
 ## 1.0.0 - 2026-11-18
