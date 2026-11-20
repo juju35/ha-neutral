@@ -34,7 +34,7 @@ Neutral:
       rgb-text-primary-color: "255, 255, 255"
       disabled-text-color: "#a3a8af"
       state-icon-color: "#6b7078"
-      state-icon-active-color: "#b7791f"
+      state-icon-active-color: "#9f691b"
 
       # App header and side panel
       app-header-background-color: "#f7f8f9"
@@ -48,10 +48,11 @@ Neutral:
 
       # Status palette of the ha-* cards (green OK, amber active, blue open,
       # cyan cold, purple media, red alert, gray idle). State colors derive from these.
+      # Amber and yellow are dark enough (>= 4.5:1 on the white card) to be read as text.
       green-color: "#2f8a4c"
-      amber-color: "#b7791f"
+      amber-color: "#9f691b"
       orange-color: "#c2610f"
-      yellow-color: "#a8860b"
+      yellow-color: "#8e7109"
       blue-color: "#2563eb"
       light-blue-color: "#2f80c9"
       cyan-color: "#0e8fa8"
@@ -61,11 +62,11 @@ Neutral:
       red-color: "#c53030"
       grey-color: "#80868e"
       success-color: "#2f8a4c"
-      warning-color: "#b7791f"
+      warning-color: "#9f691b"
       error-color: "#c53030"
       info-color: "#2563eb"
       rgb-success-color: "47, 138, 76"
-      rgb-warning-color: "183, 121, 31"
+      rgb-warning-color: "159, 105, 27"
       rgb-error-color: "197, 48, 48"
       rgb-info-color: "37, 99, 235"
 
