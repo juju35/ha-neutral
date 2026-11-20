@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.2 - 2026-11-20
+
+### Fixes
+- Status colors are readable as text in light and dark mode: every one of them (`green`, `amber`, `orange`, `yellow`, `blue`, `light-blue`, `cyan`, `teal`, `purple`, `deep-purple`, `red`, `grey`, and `success`/`warning`/`error`/`info`) now reaches a 4.5:1 contrast on the card and on the inner tiles, and 3:1 as an icon on its tinted pastille. Light mode: green, amber, orange, yellow, blue, light-blue, cyan, teal and grey are darker. Dark mode: orange, blue, light-blue, purple, deep-purple, red and grey are lighter. Hues are unchanged, and ha-liquid-glass uses the same palette.
+- The blue accent (`primary`, `accent`, selected side-panel item) follows the new blue, and the active state icon the new amber.
+- Every status color has its `rgb-*` variable, so translucent tints (icon pastilles, state badges) match the color instead of Home Assistant's default palette.
+
+### Maintenance
+- Validate: a new check computes the contrast of every status color on the theme's card, tile and dialog backgrounds, in light and dark, and fails below 4.5:1 (text) or 3:1 (icon on its pastille).
+
 ## 1.0.1 - 2026-11-20
 
 ### Fixes
