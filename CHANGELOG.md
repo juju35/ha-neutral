@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 - 2026-11-20
+
+### Fixes
+- `rgb-primary-text-color` and `rgb-text-primary-color` are set in both modes, so the parts of Home Assistant that tint with them (hovers, ripples, text on the accent) match the theme's text colors instead of the default ones.
+
+### Maintenance
+- Validate: `setup-python` pinned to a commit, and a new check that every `rgb-*` variable matches the color it shadows.
+
 ## 1.0.0 - 2026-11-18
 
 ### Features
