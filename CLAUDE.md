@@ -24,10 +24,10 @@ npx --yes jscpd@5.4.2 .
 ```
 
 ## Releasing — how it works here
-A release is **manual**: run the Release workflow (`gh workflow run release.yml`, or
-*Actions → Release → Run workflow*). It publishes `vX.Y.Z` from the top `## X.Y.Z - date` section of `CHANGELOG.md` on `main` if that tag
-does not exist yet, with the CHANGELOG sections of every version since the previous tag: several
-bumped PRs ship as one release. Merging a PR publishes nothing.
+A release follows **every `feat` or `fix` merge** on `main` (the squash title) whose version has no
+tag yet; `ci`/`docs`/`test`/`chore`/`refactor` merges publish nothing. Other bumps (e.g. `perf`) wait
+for the next feat/fix, or run the Release workflow by hand (`gh workflow run release.yml`). The notes
+gather the CHANGELOG sections of every version since the previous tag.
 (a theme repo has no `package.json`). **Never create a tag by hand.**
 
 The `Version consistency` check (validate.yml) requires the top CHANGELOG entry to read
