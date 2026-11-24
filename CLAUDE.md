@@ -25,11 +25,10 @@ npx --yes jscpd@5.4.2 .
 
 ## Releasing — how it works here
 A release is **manual**: run the Release workflow (`gh workflow run release.yml`, or
-*Actions → Release → Run workflow*). It publishes `vX.Y.Z` from the version that
-the top `## X.Y.Z - date` section of `CHANGELOG.md`
-carries on `main` if that tag does not exist yet, with the CHANGELOG sections of every version
-since the previous tag: several bumped PRs ship as one release. Merging a PR publishes nothing.
-**Never create a tag by hand.**
+*Actions → Release → Run workflow*). It publishes `vX.Y.Z` from the top `## X.Y.Z - date` section of `CHANGELOG.md` on `main` if that tag
+does not exist yet, with the CHANGELOG sections of every version since the previous tag: several
+bumped PRs ship as one release. Merging a PR publishes nothing.
+(a theme repo has no `package.json`). **Never create a tag by hand.**
 
 The `Version consistency` check (validate.yml) requires the top CHANGELOG entry to read
 `## X.Y.Z - date`, or the release fails.
