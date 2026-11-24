@@ -24,8 +24,10 @@ npx --yes jscpd@5.4.2 .
 ```
 
 ## Releasing — how it works here
-A release is **automatic**: on push to `main`, if the top `## X.Y.Z - date` section of
-`CHANGELOG.md` carries a version with no matching tag, the Release workflow publishes `vX.Y.Z`
+A release is **manual**: run the Release workflow (`gh workflow run release.yml`, or
+*Actions → Release → Run workflow*). It publishes `vX.Y.Z` from the top `## X.Y.Z - date` section of `CHANGELOG.md` on `main` if that tag
+does not exist yet, with the CHANGELOG sections of every version since the previous tag: several
+bumped PRs ship as one release. Merging a PR publishes nothing.
 (a theme repo has no `package.json`). **Never create a tag by hand.**
 
 The `Version consistency` check (validate.yml) requires the top CHANGELOG entry to read
@@ -36,7 +38,10 @@ This is a **THEME** repo. A bump is complete only when **every** file below
 carries the new version, updated together in one commit:
 1. `CHANGELOG.md` → add a "## X.Y.Z - YYYY-MM-DD" section at the top (`### Features` | `Fixes` | `Performance` | `Maintenance`).
 - Bump rule: `fix` → patch, `feat` → minor, breaking change → major.
-- The PR/commit title carries the version in parentheses, e.g. `feat: new option (X.Y.Z)`.
+- **Bump only when what users install changes** (shipped code, translations, assets of the
+  release). CI, workflows, tests, screenshots, README, lint config, CLAUDE.md: no bump, no
+  CHANGELOG entry, no version in the title (e.g. `ci: …`, `docs: …`, `test: …`, `chore: …`).
+- A bumping PR/commit title carries the version in parentheses, e.g. `feat: new option (X.Y.Z)`.
 
 ## README layout
 - Header order: H1, then the badge row, then the repo's **own logo** centered under the badges —
